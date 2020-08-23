@@ -8,13 +8,9 @@ namespace TestReportsApp {
 
             var report = new Reports.HiddenColumnsReport();
 
-            // https://docs.devexpress.com/XtraReports/401730/create-end-user-reporting-applications/web-reporting/asp-net-core-reporting/use-the-devexpress-cross-platform-drawing-engine
-            if(!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
-                DevExpress.Printing.CrossPlatform.CustomEngineHelper.RegisterCustomDrawingEngine(
-                    typeof(
-                        DevExpress.CrossPlatform.Printing.DrawingEngine.PangoCrossPlatformEngine
-                ));
-            }
+            object engine = new DevExpress.CrossPlatform.Printing.DrawingEngine.PangoCrossPlatformEngine();
+            DevExpress.XtraReports.Native.CrossPlatform
+               .CrossPlatformCustomEngineHelper.RegisterCustomEngine(report, engine);
 
             report.CreateDocument();
             report.ExportToPdf("HiddenColumnsReport.pdf");
