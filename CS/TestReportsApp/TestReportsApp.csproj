@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+    <None Remove="Data\vehicles.db" />
+    <None Remove="Reports\HiddenColumnsReport.repx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\HiddenColumnsReport.repx" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DevExpress.CrossPlatform.Printing.DrawingEngine" Version="1.*" />
+    <PackageReference Include="DevExpress.Reporting.Core" Version="21.1.*-*" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.2" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.112" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\vehicles.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Reports\HiddenColumnsReport.cs">
+      <DependentUpon>HiddenColumnsReport.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\HiddenColumnsReport.Designer.cs">
+      <DependentUpon>HiddenColumnsReport.repx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>
